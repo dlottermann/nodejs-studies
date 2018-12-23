@@ -1,0 +1,21 @@
+{
+  "name": "alura-01",
+  "version": "1.0.0",
+  "description": "Projeto do curso 01 de nodejs",
+  "main": "server.js",
+  "scripts": {
+    "test": "",
+    "start": " nodemon server.js --ignore *.marko.js"
+  },
+  "author": "dlottermann",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "marko": "^4.14.7",
+    "marko-devtools": "^1.0.16",
+    "sqlite": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
