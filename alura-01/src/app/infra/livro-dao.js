@@ -6,7 +6,15 @@ class LivroDao{
 
     lista(callback){
 
-        this._db.all("SELECT * FROM livros",(err,res)=>(callback(err,res)));
+        return new Promise((resolve,reject)=>{ 
+             this._db.all("SELECT * FROM livros",(error,result)=>{
+                 if(error) return reject('Não foi possivel executar a consulta de livros');
+                 
+                 resolve(result);
+             });
+        });
+        
+       
 
     }
 
