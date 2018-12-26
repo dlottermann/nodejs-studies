@@ -23,7 +23,19 @@ module.exports = (app) => {
 
        const livroDao = new LivroDao(db);
 
-        livroDao.lista((error,result)=>{ 
+        livroDao.lista().then(livros=>{
+            
+            res.marko(          
+                require('../views/livros/lista/lista.marko'),
+                {
+                   livros
+                }  
+              );
+        
+        }).catch(erro=>console.log(erro));
+        
+        
+       /* livroDao.lista((error,result)=>{ 
 
             res.marko(          
                 require('../views/livros/lista/lista.marko'),
@@ -32,7 +44,7 @@ module.exports = (app) => {
                 }  
               );
 
-        });
+        });*/
        
     });
 };
