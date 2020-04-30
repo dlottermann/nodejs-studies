@@ -2,53 +2,44 @@
 "use strict";
 
 var marko_template = module.exports = require("marko/src/html").t(__filename),
-    marko_componentType = "/alura-01$1.0.0/src/app/views/livros/lista/lista.marko",
+    marko_componentType = "/alura-01$1.0.0/src/app/views/livros/form/form.marko",
     components_helpers = require("marko/src/components/helpers"),
     marko_renderer = components_helpers.r,
     marko_defineComponent = components_helpers.c,
     marko_helpers = require("marko/src/runtime/html/helpers"),
     marko_loadTag = marko_helpers.t,
     component_globals_tag = marko_loadTag(require("marko/src/components/taglib/component-globals-tag")),
-    marko_forEach = marko_helpers.f,
-    marko_escapeXml = marko_helpers.x,
     marko_attr = marko_helpers.a,
+    marko_escapeXml = marko_helpers.x,
     init_components_tag = marko_loadTag(require("marko/src/components/taglib/init-components-tag")),
     await_reorderer_tag = marko_loadTag(require("marko/src/taglibs/async/await-reorderer-tag"));
 
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<html><head><meta charset=\"utf-8\"> <title>Listagem de Livros</title></head><body>");
+  out.w("<html><head><title>Cadastro de livros</title></head><body>");
 
   component_globals_tag({}, out);
 
-  out.w("<h1>Listagem de livros</h1><table id=\"livros\"><tr><td>ID</td><td>Título</td><td>Preço</td><td>Ação</td></tr>");
+  out.w("<h1>Cadastro de livros</h1><form method=\"post\" action=\"/livros\">");
 
-  var for__12 = 0;
+  if (data.livro.id) {
+    out.w("<div><input type=\"hidden\" name=\"_method\" value=\"PUT\"><input type=\"hidden\" name=\"id\" id=\"id\"" +
+      marko_attr("value", "" + data.livro.id) +
+      "></div>");
+  }
 
-  marko_forEach(data.livros, function(livro) {
-    var keyscope__13 = "[" + ((for__12++) + "]");
-
-    out.w("<tr" +
-      marko_attr("id", "livro_" + livro.id) +
-      "><td>" +
-      marko_escapeXml(livro.id) +
-      "</td><td>" +
-      marko_escapeXml(livro.titulo) +
-      "</td><td>" +
-      marko_escapeXml(livro.preco) +
-      "</td><td><a" +
-      marko_attr("href", "/livros/form/" + livro.id) +
-      ">Editar</a></td><td><a href=\"#\"" +
-      marko_attr("data-ref", "" + livro.id) +
-      " data-type=\"remocao\">Remover</a></td></tr>");
-  });
-
-  out.w("</table><script src=\"/estatico/js/remove-livro.js\"></script>");
+  out.w("<div><label for=\"titulo\">Titulo:</label><input type=\"text\" id=\"titulo\" name=\"titulo\"" +
+    marko_attr("value", "" + data.livro.titulo) +
+    " placeholder=\"Coloque titulo do livro\"></div><div><label for=\"preco\">Preço:</label><input type=\"text\" id=\"preco\" name=\"preco\" placeholder=\"Preço\"" +
+    marko_attr("value", "" + data.livro.preco) +
+    "></div><div><label for=\"descricao\">Descrição:</label><textarea cols=\"20\" row=\"10\" id=\"descricao\" name=\"descricao\">" +
+    marko_escapeXml(data.livro.descricao) +
+    "</textarea></div><input type=\"submit\" value=\"Salvar\"> </form>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "23");
+  await_reorderer_tag({}, out, __component, "19");
 
   out.w("</body></html>");
 }
@@ -61,7 +52,7 @@ marko_template._ = marko_renderer(render, {
 marko_template.Component = marko_defineComponent({}, marko_template._);
 
 marko_template.meta = {
-    id: "/alura-01$1.0.0/src/app/views/livros/lista/lista.marko",
+    id: "/alura-01$1.0.0/src/app/views/livros/form/form.marko",
     tags: [
       "marko/src/components/taglib/component-globals-tag",
       "marko/src/components/taglib/init-components-tag",
